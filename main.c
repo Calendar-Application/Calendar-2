@@ -29,7 +29,7 @@ int day_Number(struct date d) {
     dayNumber += d.day;
 
     for (i = 1; i < d.year; i++) {
-        if (checkLeap(d.year) == 29) {
+        if (checkLeap(i) == 29) {
             dayNumber += 366;
         }
         else {
