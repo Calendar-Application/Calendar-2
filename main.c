@@ -174,44 +174,75 @@ int day_index(struct date d)
 
 int main(int argc, char const *argv[])
 {
+    int choice;
+    printf("Enter 1: Find difference between two dates || 2: Find the day of the week for a given date || 0: Exit\n");
+    printf("Enter choice: ");
+    scanf("%d", &choice);
     struct date d1, d2;
     
-    // input first date
-    printf("Enter First date: ");
-    scanf("%d%d%d", &d1.d, &d1.m, &d1.y);
-    
-    //  input second date
-    printf("Enter Second date: ");
-    scanf("%d%d%d", &d2.d, &d2.m, &d2.y);
-    
-    //checking validity of dates:
-    if (isValid(d1) == 0 || isValid(d2) == 0) {
-        printf("Date invalid");
-        return 0;
+    switch(choice) {
+        case 1:
+            // input first date
+            printf("Enter First date: ");
+            scanf("%d%d%d", &d1.d, &d1.m, &d1.y);
+            
+            //  input second date
+            printf("Enter Second date: ");
+            scanf("%d%d%d", &d2.d, &d2.m, &d2.y);
+            
+            //checking validity of dates:
+            if (isValid(d1) == 0 || isValid(d2) == 0) {
+                printf("Date invalid");
+                return 0;
+            }
+            
+            //  calculating difference
+            struct date diff_d;
+            long diff_i;
+            diff_i = dayDifference(d1, d2);
+            diff_d = format_date_diff(d1, d2);
+            
+            // displaying output:
+            if (diff_d.d && diff_d.y == 0 && diff_d.m == 0) {
+                printf("\nDifference is %ld days", diff_i);
+            }
+            else {
+                printf("\nDifference is %ld days OR ", diff_i);
+                if (diff_d.y) {
+                    printf("%d years ", diff_d.y);
+                }
+                if (diff_d.m) {
+                    printf("%d months ", diff_d.m);
+                }
+                if (diff_d.d) {
+                    printf("%d days", diff_d.d);
+                }
+            }
+            break;
+            
+        case 2:
+            // input date
+            printf("Enter date: ");
+            scanf("%d%d%d", &d1.d, &d1.m, &d1.y);
+            
+            //checking validity of date
+            if (isValid(d1) == 0) {
+                printf("Date invalid");
+                return 0;
+            }
+            char *weekDays[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"}; // declaration of week array
+            int index = day_index(d1); // getting the index of the day of week
+            printf("%s", weekDays[index]);
+            break;
+            
+        case 0:
+            printf("Exiting program....");
+            return 0;
+            
+            // default case
+        default:
+            printf("Wrong choice!");
+            
     }
-    
-    //  calculating difference
-    struct date diff_d;
-    long diff_i;
-    diff_i = dayDifference(d1, d2);
-    diff_d = format_date_diff(d1, d2);
-    
-    // displaying output:
-    if (diff_d.d && diff_d.y == 0 && diff_d.m == 0) {
-        printf("\nDifference is %ld days", diff_i);
-    }
-    else {
-        printf("\nDifference is %ld days OR ", diff_i);
-        if (diff_d.y) {
-            printf("%d years ", diff_d.y);
-        }
-        if (diff_d.m) {
-            printf("%d months ", diff_d.m);
-        }
-        if (diff_d.d) {
-            printf("%d days", diff_d.d);
-        }
-    }
-    
     return 0;
 }
