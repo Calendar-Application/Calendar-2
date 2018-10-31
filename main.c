@@ -312,12 +312,15 @@ int day_index(struct date d)
 // prints the whole calendar for a year
 
 void yearView() {
+    
+    //input year
     int year;
     printf("Enter year: ");
     scanf("%d",&year);
     
     months[2] = checkLeap(year);
     
+    // checking validity
     if(year < 1 || year > 9999) {
         printf("Invalid year..\n");
         return;
@@ -329,11 +332,15 @@ void yearView() {
     for (monthIndex = 0; monthIndex < 12; monthIndex++) {
         
         printf("\n\n");
+        
+        
         int spaces = (int) (51 - strlen(month_name[monthIndex]) - 11)/2;
         int i;
         for(i = 0; i<spaces; i++)
             printf(" ");
         printf("** %d %s **\n\n",year, month_name[monthIndex]);
+        
+        // displaying the week heading
         
         for (daysOfWeekIndex = 0; daysOfWeekIndex < 7; daysOfWeekIndex++) {
             printf("%s\t", daysOfWeek[daysOfWeekIndex]);
@@ -341,15 +348,19 @@ void yearView() {
         
         printf("\n");
         
+        // adjusting spaces before the starting day of month
         for(weekDayIndex = 0; weekDayIndex <= firstDayIndex - 1; weekDayIndex++) {
             
             printf("\t ");
         }
         
+        // displaying days of month
         for (daysIndex = 1; daysIndex <= daysOfMonth[monthIndex]; daysIndex++) {
             
             printf("%d\t ", daysIndex);
             weekDayIndex++;
+            
+            // checking for end of a week
             
             if (weekDayIndex > 6) {
                 
@@ -366,12 +377,16 @@ void yearView() {
 
 void monthView() {
     int year, month;
+    
+    //input year and month
     printf("Enter year: ");
     scanf("%d",&year);
     printf("Enter month number: ");
     scanf("%d", &month);
     
     months[2] = checkLeap(year);
+    
+    //validity checking
     
     if(month < 1 || month > 12 || year < 1 || year > 9999) {
         printf("Invalid month or year..\n");
@@ -391,12 +406,17 @@ void monthView() {
     for (monthIndex = 0; monthIndex < month; monthIndex++) {
         
         if (monthIndex == month - 1) {
+            
+            // displaying the week heading
+            
             for (daysOfWeekIndex = 0; daysOfWeekIndex < 7; daysOfWeekIndex++) {
                 
                 printf("%s\t", daysOfWeek[daysOfWeekIndex]);
             }
             printf("\n");
         }
+        
+        // adjusting spaces before first day of month
         
         for(weekDayIndex = 0; weekDayIndex <= firstDayIndex - 1; weekDayIndex++) {
             if (monthIndex == month - 1) {
@@ -405,12 +425,16 @@ void monthView() {
             
         }
         
+        // displaying days of month
+        
         for (daysIndex = 1; daysIndex <= daysOfMonth[monthIndex]; daysIndex++) {
             if (monthIndex == month - 1) {
                 printf("%d\t ", daysIndex);
             }
             
             weekDayIndex++;
+            
+            // checking for end of week
             
             if (weekDayIndex > 6) {
                 if (monthIndex == month - 1) {
@@ -426,7 +450,6 @@ void monthView() {
 }
 
 // returns the index of first day of a year
-
 int getFirstDayIndex(int year){
     
     int day = (((year - 1) * 365) + ((year - 1) / 4) - ((year - 1) / 100) + ((year) / 400) + 1) % 7;
