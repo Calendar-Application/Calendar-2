@@ -52,7 +52,7 @@ int month_code(int);
 int day_index(struct date);
 void monthView(void);
 void yearView(void);
-int getFirstDayIndex(int year);
+int getFirstDayIndex(int);
 
 
 // MAIN FUNCTION
