@@ -39,8 +39,8 @@ struct date
 //  note: this is a non leap year's no. of days in a month list
 int months[13] = {0,31,28,31,30,31,30,31,31,30,31,30,31};
 int daysOfMonth[]= {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-char *month_name[]= {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-char *daysOfWeek[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+char month_name[12][20]= {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+char daysOfWeek[7][5] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
 // function prototype declarations:
 int checkLeap(int);
@@ -60,7 +60,7 @@ int getFirstDayIndex(int);
 int main()
 {
     int choice;
-    char *weekDays[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"}; // declaration of week array
+    char weekDays[7][15] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"}; // declaration of week array
     int index;
     
     // continue running application without automatically stopping
